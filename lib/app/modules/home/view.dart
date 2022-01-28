@@ -56,6 +56,10 @@ class Home extends GetView<HomeController> {
                           ),
                         );
                       } else {
+                        if (state[index].pokemonDetails == null)
+                          return Center(
+                            child: CircularProgressIndicator(),
+                          );
                         return GestureDetector(
                           onTap: () => controller.openDetails(state[index]),
                           child: Container(
@@ -151,7 +155,7 @@ class Home extends GetView<HomeController> {
                 onLoading: const Center(
                   child: CircularProgressIndicator(),
                 ),
-                onError: (error) => Text('Error: $error')),
+                onError: (error) => Text('Error:123213 $error')),
           ],
         ),
       ),

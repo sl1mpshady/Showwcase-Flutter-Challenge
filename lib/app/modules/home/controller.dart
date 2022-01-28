@@ -35,7 +35,8 @@ class HomeController extends GetxController with StateMixin<List<Pokemon>> {
           if (pokemon == pokemonResult.results.last &&
               pokemon.pokemonDetails != null) {
             Future.delayed(const Duration(milliseconds: 500), () {
-              pokemons.addAll(pokemonResult.results);
+              // ignore: invalid_use_of_protected_member
+              pokemons.value.addAll(pokemonResult.results);
               fetching.value = false;
               debugPrint('Done fetching pokemons');
               change(pokemons, status: RxStatus.success());

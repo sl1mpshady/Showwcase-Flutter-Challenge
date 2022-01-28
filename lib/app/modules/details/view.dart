@@ -154,7 +154,10 @@ class Details extends GetView<DetailsController> {
                                         const SizedBox(
                                           height: 5,
                                         ),
-                                        Text('0.70cm',
+                                        Text(
+                                            controller
+                                                .pokemon.pokemonDetails!.height
+                                                .toString(),
                                             style: GoogleFonts.ubuntu(
                                                 fontSize: 13,
                                                 color: Colors.black,
@@ -172,7 +175,10 @@ class Details extends GetView<DetailsController> {
                                         const SizedBox(
                                           height: 5,
                                         ),
-                                        Text('0.70kg',
+                                        Text(
+                                            controller
+                                                .pokemon.pokemonDetails!.weight
+                                                .toString(),
                                             style: GoogleFonts.ubuntu(
                                                 fontSize: 13,
                                                 color: Colors.black,
@@ -184,7 +190,34 @@ class Details extends GetView<DetailsController> {
                               )
                             ],
                           ),
-                          Text('123'),
+                          Column(
+                              children: controller
+                                  .pokemon.pokemonDetails!.baseStats
+                                  .map((stat) => Container(
+                                        margin:
+                                            const EdgeInsets.only(bottom: 10),
+                                        child: Column(
+                                          children: [
+                                            Text(stat.name,
+                                                style: GoogleFonts.ubuntu(
+                                                    fontSize: 13,
+                                                    color: Colors.black
+                                                        .withOpacity(0.4),
+                                                    fontWeight:
+                                                        FontWeight.w600)),
+                                            const SizedBox(
+                                              height: 5,
+                                            ),
+                                            Text(stat.stat.toString(),
+                                                style: GoogleFonts.ubuntu(
+                                                    fontSize: 13,
+                                                    color: Colors.black,
+                                                    fontWeight:
+                                                        FontWeight.w600)),
+                                          ],
+                                        ),
+                                      ))
+                                  .toList()),
                           Text('123'),
                           Text('123'),
                         ]),
