@@ -3,6 +3,8 @@ import 'package:get/get_instance/src/extension_instance.dart';
 import 'package:get/route_manager.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:pokedex/app/data/services/storage/services.dart';
+import 'package:pokedex/app/modules/details/binding.dart';
+import 'package:pokedex/app/modules/details/view.dart';
 import 'package:pokedex/app/modules/home/binding.dart';
 import 'package:pokedex/app/modules/home/view.dart';
 
@@ -22,6 +24,11 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: const Home(),
       initialBinding: HomeBinding(),
+      getPages: [
+        GetPage(name: '/', page: () => Home(), binding: HomeBinding()),
+        GetPage(
+            name: '/details', page: () => Details(), binding: DetailsBinding())
+      ],
     );
   }
 }

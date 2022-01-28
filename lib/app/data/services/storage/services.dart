@@ -1,12 +1,10 @@
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:pokedex/app/core/utils/keys.dart';
 
 class StorageService extends GetxService {
   late GetStorage _box;
   Future<StorageService> init() async {
     _box = GetStorage();
-    await _box.writeIfNull(pokemonsKey, []);
     return this;
   }
 

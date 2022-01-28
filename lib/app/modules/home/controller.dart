@@ -31,7 +31,9 @@ class HomeController extends GetxController with StateMixin<List<Pokemon>> {
       for (var pokemon in pokemonResult.results) {
         pokemonProvider.getPokemonDetails(pokemon.name).then((value) {
           pokemon.pokemonDetails = value;
-          if (pokemon == pokemonResult.results.last) {
+
+          if (pokemon == pokemonResult.results.last &&
+              pokemon.pokemonDetails != null) {
             Future.delayed(const Duration(milliseconds: 500), () {
               pokemons.addAll(pokemonResult.results);
               fetching.value = false;
@@ -53,5 +55,9 @@ class HomeController extends GetxController with StateMixin<List<Pokemon>> {
   void onNextPage() {
     page++;
     fetchPokemons(offset: (page - 1) * pageSize, limit: pageSize);
+  }
+
+  void openDetails(Pokemon pokemon) {
+    Get.toNamed('/details', arguments: {'pokemon': pokemon});
   }
 }
