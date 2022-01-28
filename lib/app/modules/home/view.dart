@@ -38,6 +38,7 @@ class Home extends GetView<HomeController> {
                     itemCount: state!.length + 1,
                     itemBuilder: (BuildContext ctx, index) {
                       if (index == state.length + 1 - 1) {
+                        controller.onNextPage();
                         return const Center(
                           child: CircularProgressIndicator(),
                         );
