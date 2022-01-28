@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pokedex/app/data/services/type/services.dart';
 import 'package:pokedex/app/modules/home/controller.dart';
+import 'package:visibility_detector/visibility_detector.dart';
 
 class Home extends GetView<HomeController> {
   const Home({Key? key}) : super(key: key);
@@ -38,9 +39,21 @@ class Home extends GetView<HomeController> {
                     itemCount: state!.length + 1,
                     itemBuilder: (BuildContext ctx, index) {
                       if (index == state.length + 1 - 1) {
-                        controller.onNextPage();
-                        return const Center(
-                          child: CircularProgressIndicator(),
+                        return VisibilityDetector(
+                          key: const Key('spinner'),
+                          onVisibilityChanged: (visibilityInfo) {
+                            var visiblePercentage =
+                                visibilityInfo.visibleFraction * 100;
+                            debugPrint(
+                                'Spinner is $visiblePercentage% visible');
+                            if (visiblePercentage == 100.0) {
+                              debugPrint('Fetching next page');
+                              controller.onNextPage();
+                            }
+                          },
+                          child: const Center(
+                            child: CircularProgressIndicator(),
+                          ),
                         );
                       } else {
                         return Container(

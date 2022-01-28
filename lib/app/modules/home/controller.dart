@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pokedex/app/data/models/pokemon.dart';
 import 'package:pokedex/app/data/models/pokemon_list.dart';
@@ -29,6 +30,7 @@ class HomeController extends GetxController with StateMixin<List<Pokemon>> {
             Future.delayed(const Duration(seconds: 1), () {
               pokemons.addAll(pokemonResult.results);
               fetching.value = false;
+              debugPrint('Done fetching pokemons');
               change(pokemons, status: RxStatus.success());
             });
           }
