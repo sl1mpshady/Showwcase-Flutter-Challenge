@@ -56,10 +56,11 @@ class Home extends GetView<HomeController> {
                           ),
                         );
                       } else {
-                        if (state[index].pokemonDetails == null)
-                          return Center(
+                        if (state[index].pokemonDetails == null) {
+                          return const Center(
                             child: CircularProgressIndicator(),
                           );
+                        }
                         return GestureDetector(
                           onTap: () => controller.openDetails(state[index]),
                           child: Container(

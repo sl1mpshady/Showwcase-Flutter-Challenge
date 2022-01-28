@@ -218,8 +218,8 @@ class Details extends GetView<DetailsController> {
                                         ),
                                       ))
                                   .toList()),
-                          Text('123'),
-                          Text('123'),
+                          const Text('123'),
+                          const Text('123'),
                         ]),
                   )
                 ],
