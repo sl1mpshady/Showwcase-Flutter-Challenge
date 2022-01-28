@@ -10,7 +10,6 @@ class Home extends GetView<HomeController> {
 
   @override
   Widget build(BuildContext context) {
-    print(controller.hello);
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -36,94 +35,100 @@ class Home extends GetView<HomeController> {
                             childAspectRatio: 3 / 2,
                             crossAxisSpacing: 10,
                             mainAxisSpacing: 10),
-                    itemCount: 20,
+                    itemCount: state!.length + 1,
                     itemBuilder: (BuildContext ctx, index) {
-                      return Container(
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                            color: TypeColor.get(
-                                state![index].pokemonDetails!.pokemonType!),
-                            borderRadius: BorderRadius.circular(15)),
-                        child: Stack(
-                          children: [
-                            Positioned(
-                              right: 0,
-                              bottom: 0,
-                              child: Opacity(
-                                opacity: 0.7,
-                                child: SvgPicture.asset(
-                                  'assets/images/logo.svg',
-                                  width: 80,
+                      if (index == state.length + 1 - 1) {
+                        return const Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      } else {
+                        return Container(
+                          alignment: Alignment.center,
+                          decoration: BoxDecoration(
+                              color: TypeColor.get(
+                                  state[index].pokemonDetails!.pokemonType!),
+                              borderRadius: BorderRadius.circular(15)),
+                          child: Stack(
+                            children: [
+                              Positioned(
+                                right: 0,
+                                bottom: 0,
+                                child: Opacity(
+                                  opacity: 0.7,
+                                  child: SvgPicture.asset(
+                                    'assets/images/logo.svg',
+                                    width: 80,
+                                  ),
                                 ),
                               ),
-                            ),
-                            Positioned(
-                              right: 10,
-                              bottom: 10,
-                              child: SvgPicture.network(
-                                state[index].pokemonDetails!.sprite,
-                                //'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/25.svg',
-                                width: 60,
+                              Positioned(
+                                right: 10,
+                                bottom: 10,
+                                child: SvgPicture.network(
+                                  state[index].pokemonDetails!.sprite,
+                                  //'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/25.svg',
+                                  width: 60,
+                                ),
                               ),
-                            ),
-                            Positioned.fill(
-                                child: Padding(
-                              padding: const EdgeInsets.only(
-                                  top: 20, bottom: 10, left: 10, right: 10),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    state[index].name,
-                                    style: GoogleFonts.ubuntu(
-                                        shadows: <Shadow>[
-                                          const Shadow(
-                                            offset: Offset(0.0, 0.0),
-                                            blurRadius: 1.0,
-                                            color: Colors.black,
-                                          ),
-                                        ],
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.white),
-                                  ),
-                                  const SizedBox(
-                                    height: 10,
-                                  ),
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: state[index]
-                                        .pokemonDetails!
-                                        .pokemonTypes
-                                        .map((pokemonType) => Container(
-                                              margin: const EdgeInsets.only(
-                                                  bottom: 5),
-                                              padding:
-                                                  const EdgeInsets.symmetric(
-                                                      horizontal: 10,
-                                                      vertical: 3),
-                                              decoration: BoxDecoration(
-                                                  color: Colors.white
-                                                      .withOpacity(0.3),
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          10)),
-                                              child: Text(pokemonType,
-                                                  style: GoogleFonts.ubuntu(
-                                                      fontSize: 10,
-                                                      color: Colors.white,
-                                                      fontWeight:
-                                                          FontWeight.w500)),
-                                            ))
-                                        .toList(),
-                                  )
-                                ],
-                              ),
-                            ))
-                          ],
-                        ),
-                      );
+                              Positioned.fill(
+                                  child: Padding(
+                                padding: const EdgeInsets.only(
+                                    top: 20, bottom: 10, left: 10, right: 10),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      state[index].name,
+                                      style: GoogleFonts.ubuntu(
+                                          shadows: <Shadow>[
+                                            const Shadow(
+                                              offset: Offset(0.0, 0.0),
+                                              blurRadius: 1.0,
+                                              color: Colors.black,
+                                            ),
+                                          ],
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.white),
+                                    ),
+                                    const SizedBox(
+                                      height: 10,
+                                    ),
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: state[index]
+                                          .pokemonDetails!
+                                          .pokemonTypes
+                                          .map((pokemonType) => Container(
+                                                margin: const EdgeInsets.only(
+                                                    bottom: 5),
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        horizontal: 10,
+                                                        vertical: 3),
+                                                decoration: BoxDecoration(
+                                                    color: Colors.white
+                                                        .withOpacity(0.3),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            10)),
+                                                child: Text(pokemonType,
+                                                    style: GoogleFonts.ubuntu(
+                                                        fontSize: 10,
+                                                        color: Colors.white,
+                                                        fontWeight:
+                                                            FontWeight.w500)),
+                                              ))
+                                          .toList(),
+                                    )
+                                  ],
+                                ),
+                              ))
+                            ],
+                          ),
+                        );
+                      }
                     }),
                 onLoading: const Center(
                   child: CircularProgressIndicator(),
