@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:pokedex/app/data/models/pokemon.dart';
 import 'package:pokedex/app/data/models/pokemon_list.dart';
 import 'package:pokedex/app/data/provider/pokemon/provider.dart';
+import 'package:pokedex/app/modules/form/controller.dart';
 
 class HomeController extends GetxController with StateMixin<List<Pokemon>> {
   PokemonProvider pokemonProvider;
@@ -58,5 +59,9 @@ class HomeController extends GetxController with StateMixin<List<Pokemon>> {
 
   void openDetails(Pokemon pokemon) {
     Get.toNamed('/details', arguments: {'pokemon': pokemon});
+  }
+
+  void clearForm() {
+    Get.find<FormController>().clear();
   }
 }

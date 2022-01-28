@@ -3,6 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pokedex/app/data/services/type/services.dart';
+import 'package:pokedex/app/modules/form/view.dart';
 import 'package:pokedex/app/modules/home/controller.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
@@ -156,9 +157,17 @@ class Home extends GetView<HomeController> {
                 onLoading: const Center(
                   child: CircularProgressIndicator(),
                 ),
-                onError: (error) => Text('Error:123213 $error')),
+                onError: (error) => Text('Error: $error')),
           ],
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Get.bottomSheet(CustomForm(), persistent: false).whenComplete(() {
+            controller.clearForm();
+          });
+        },
+        child: const Icon(Icons.add),
       ),
     );
   }
