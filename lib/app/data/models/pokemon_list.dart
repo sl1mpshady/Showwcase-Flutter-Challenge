@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:pokedex/app/data/models/pokemon.dart';
 
 class PokemonList {
@@ -14,7 +16,9 @@ class PokemonList {
           key: url ?? json['key'],
           next: json['next'],
           previous: json['previous'],
-          results: (json['results'] as List<dynamic>)
+          results: ((json['results'] is String
+                  ? jsonDecode(json['results'])
+                  : json['results']) as List<dynamic>)
               .map((e) => Pokemon.fromJson(e))
               .toList());
 
@@ -22,6 +26,6 @@ class PokemonList {
         'key': key,
         'next': next,
         'previous': previous,
-        'results': results.toString()
+        'results': jsonEncode(results)
       };
 }

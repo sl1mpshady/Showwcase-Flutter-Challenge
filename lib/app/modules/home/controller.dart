@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pokedex/app/data/models/pokemon.dart';
@@ -10,24 +12,27 @@ class HomeController extends GetxController with StateMixin<List<Pokemon>> {
 
   final int pageSize = 20;
   int page = 1;
-  var pokemons = <Pokemon>[];
+  var pokemons = <Pokemon>[].obs;
   RxBool fetching = false.obs;
 
   @override
   void onInit() {
     super.onInit();
-    fetchPokemons();
+    fetchPokemons(
+      limit: pageSize,
+    );
   }
 
   void fetchPokemons({int? limit, int? offset}) {
     fetching.value = true;
-    pokemonProvider.getPokemons(limit: limit, offset: offset).then((result) {
-      PokemonList? pokemonResult = result.body;
-      for (var pokemon in pokemonResult!.results) {
+    pokemonProvider.getPokemons(limit: limit ?? 20, offset: offset ?? 0).then(
+        (result) {
+      PokemonList? pokemonResult = result;
+      for (var pokemon in pokemonResult.results) {
         pokemonProvider.getPokemonDetails(pokemon.name).then((value) {
-          pokemon.pokemonDetails = value.body;
+          pokemon.pokemonDetails = value;
           if (pokemon == pokemonResult.results.last) {
-            Future.delayed(const Duration(seconds: 1), () {
+            Future.delayed(const Duration(milliseconds: 500), () {
               pokemons.addAll(pokemonResult.results);
               fetching.value = false;
               debugPrint('Done fetching pokemons');
