@@ -284,6 +284,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "visibility_detector",
+      "rootUri": "file:///Users/fred/development/flutter/.pub-cache/hosted/pub.dartlang.org/visibility_detector-0.2.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "win32",
       "rootUri": "file:///Users/fred/development/flutter/.pub-cache/hosted/pub.dartlang.org/win32-2.3.6",
       "packageUri": "lib/",
@@ -308,7 +314,7 @@
       "languageVersion": "2.12"
     }
   ],
-  "generated": "2022-01-28T08:27:13.445391Z",
+  "generated": "2022-01-28T13:29:26.560118Z",
   "generator": "pub",
   "generatorVersion": "2.14.4"
 }
